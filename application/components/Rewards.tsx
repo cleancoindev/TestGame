@@ -40,6 +40,7 @@ export default function Rewards({ miningContract, tokenContract }: Props) {
     <div
       style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
     >
+    <div children={null}>
       <p>
         Your <b>Gold Gems</b>
       </p>
