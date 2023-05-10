@@ -1,33 +1,22 @@
-import React from 'react';
-import { useState } from 'react';
-import { useWeb3 } from '@solana/web3.js';
-import { useRouter } from 'next/router';
-
-import ThirdwebNftMedia from '@thirdweb/nft-media';
-
-import styles from './Rewards.module.css';
-
-const useHandleClick = () => {
-  const handleClick = () => {
-    // Get the token metadata
-    const { id } = useRouter().query;
-    connection.request({
-      method: 'get',
-      path: `/metadata/${id}`,
-    }).then((response) => {
-      setTokenMetadata(response.json());
-    });
-  };
-
-  return handleClick;
-};
+import React, { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import ThirdwebNftMedia from "@thirdweb/nft-media";
 
 const Rewards = () => {
   const { publicKey } = useRouter();
   const { connection } = useWeb3();
   const [tokenMetadata, setTokenMetadata] = useState();
 
-  const handleClick = useHandleClick();
+  useEffect(() => {
+    // Get the token metadata
+    const { id } = useRouter().query;
+    connection.request({
+      method: "get",
+      path: `/metadata/${id}`,
+    }).then((response) => {
+      setTokenMetadata(response.json());
+    });
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -38,7 +27,9 @@ const Rewards = () => {
         <p>
           You have <b>{tokenMetadata?.totalSupply}</b> Gold Gems
         </p>
-        <button onClick={handleClick}>
+        <button onClick={() => {
+          // Stake
+        }}>
           Stake
         </button>
         {tokenMetadata && <ThirdwebNftMedia metadata={tokenMetadata} height={"48"} />}
