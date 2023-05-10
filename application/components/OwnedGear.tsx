@@ -64,7 +64,6 @@ export default function OwnedGear({ pickaxeContract, miningContract }: Props) {
 
             <div className={styles.smallMargin}>
               <Web3Button
-                colorMode="dark"
                 contractAddress={MINING_CONTRACT_ADDRESS}
                 action={() => equip(p.metadata.id)}
               >
