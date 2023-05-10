@@ -15,7 +15,7 @@ const Rewards = () => {
     }).then((response) => {
       setTokenMetadata(response.json());
     });
-  }, [connection]);
+  }, []);
 
   return (
     <div className={styles.container}>
