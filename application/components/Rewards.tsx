@@ -7,15 +7,19 @@ import ThirdwebNftMedia from '@thirdweb/nft-media';
 
 import styles from './Rewards.module.css';
 
-const handleClick = () => {
-  // Get the token metadata
-  const { id } = useRouter().query;
-  connection.request({
-    method: 'get',
-    path: `/metadata/${id}`,
-  }).then((response) => {
-    setTokenMetadata(response.json());
-  });
+const useHandleClick = () => {
+  const handleClick = () => {
+    // Get the token metadata
+    const { id } = useRouter().query;
+    connection.request({
+      method: 'get',
+      path: `/metadata/${id}`,
+    }).then((response) => {
+      setTokenMetadata(response.json());
+    });
+  };
+
+  return handleClick;
 };
 
 const Rewards = () => {
