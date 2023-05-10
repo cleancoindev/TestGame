@@ -36,23 +36,23 @@ export default function Rewards({ miningContract, tokenContract }: Props) {
     [address]
   );
 
-  return (
-    <div
-      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
-    >
-    <div children={null}>
+ return (
+  <div
+    style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+  >
+    <div children={&rbrace;}>
       <p>
         Your <b>Gold Gems</b>
       </p>
 
       {tokenMetadata && (
         <ThirdwebNftMedia
-          // @ts-ignore
           metadata={tokenMetadata}
           height={"48"}
         />
       )}
-      </div>
+    </div>
+  );
       <div>
       <p className={styles.noGapBottom}>
         Balance: <b>{currentBalance?.displayValue}</b>
