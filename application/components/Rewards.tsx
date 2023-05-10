@@ -36,11 +36,11 @@ export default function Rewards({ miningContract, tokenContract }: Props) {
     [address]
   );
 
- return (
+return (
   <div
     style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
   >
-    <div children={&rbrace;}>
+    <div>
       <p>
         Your <b>Gold Gems</b>
       </p>
