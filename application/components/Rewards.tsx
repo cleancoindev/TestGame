@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import ThirdwebNftMedia from "@thirdweb/nft-media";
 
-const Rewards = () => {
+const useRewards = () => {
   const { publicKey } = useRouter();
   const [tokenMetadata, setTokenMetadata] = useState();
 
@@ -16,6 +16,15 @@ const Rewards = () => {
       setTokenMetadata(response.json());
     });
   }, []);
+
+  return {
+    publicKey,
+    tokenMetadata,
+  };
+};
+
+const Rewards = () => {
+  const { publicKey, tokenMetadata } = useRewards();
 
   return (
     <div className={styles.container}>
