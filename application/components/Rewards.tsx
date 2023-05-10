@@ -7,25 +7,21 @@ import ThirdwebNftMedia from '@thirdweb/nft-media';
 
 import styles from './Rewards.module.css';
 
+const handleClick = () => {
+  // Get the token metadata
+  const { id } = useRouter().query;
+  connection.request({
+    method: 'get',
+    path: `/metadata/${id}`,
+  }).then((response) => {
+    setTokenMetadata(response.json());
+  });
+};
+
 const Rewards = () => {
   const { publicKey } = useRouter();
   const { connection } = useWeb3();
   const [tokenMetadata, setTokenMetadata] = useState();
-
-const useHandleClick = () => {
-  const handleClick = () => {
-    // Get the token metadata
-    const { id } = useRouter().query;
-    connection.request({
-      method: 'get',
-      path: `/metadata/${id}`,
-    }).then((response) => {
-      setTokenMetadata(response.json());
-    });
-  };
-
-  return handleClick;
-};
 
   return (
     <div className={styles.container}>
@@ -39,13 +35,7 @@ const useHandleClick = () => {
         <button onClick={handleClick}>
           Stake
         </button>
-        {tokenMetadata && (
-          <ThirdwebNftMedia
-            metadata={tokenMetadata}
-            height={"48"}
-          />
-        )}
-        &rbrace;
+        {tokenMetadata && <ThirdwebNftMedia metadata={tokenMetadata} height={"48"} />}
       </div>
     </div>
   );
