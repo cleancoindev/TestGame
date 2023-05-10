@@ -4,7 +4,6 @@ import ThirdwebNftMedia from "@thirdweb/nft-media";
 
 const Rewards = () => {
   const { publicKey } = useRouter();
-  const { connection } = useWeb3();
   const [tokenMetadata, setTokenMetadata] = useState();
 
   useEffect(() => {
@@ -16,7 +15,7 @@ const Rewards = () => {
     }).then((response) => {
       setTokenMetadata(response.json());
     });
-  }, []);
+  }, [connection]);
 
   return (
     <div className={styles.container}>
