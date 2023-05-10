@@ -1,46 +1,49 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import ThirdwebNftMedia, { ThirdwebNftMediaProps } from "@thirdweb/nft-media";
-
+// Import the ThirdwebNftMedia component from @thirdweb-dev/react
+import { ThirdwebNftMedia } from "@thirdweb-dev/react";
 
 const useRouterParams = () => {
   const router = useRouter();
-  const { publicKey, id } = router.query;
-  return { publicKey, id };
+  const { query } = router;
+  const [params, setParams] = useState({});
+
+  useEffect(() => {
+    if (Object.keys(query).length > 0) {
+      setParams(query);
+    }
+  }, [query]);
+
+  return params;
 };
 
 const Rewards = () => {
-  const { publicKey, id } = useRouterParams();
-  const [tokenMetadata, setTokenMetadata] = useState();
+  const params = useRouterParams();
+  const [nftMetadata, setNftMetadata] = useState(null);
 
   useEffect(() => {
-    // Get the token metadata
-    connection.request({
-      method: "get",
-      path: `/metadata/${id}`,
-    }).then((response) => {
-      setTokenMetadata(response.json());
-    });
-  }, []);
+    if (params.nft) {
+      // Fetch the NFT metadata from the API
+      fetch(`https://api.thirdweb.com/nfts/${params.nft}`)
+        .then((response) => response.json())
+        .then((data) => {
+          setNftMetadata(data.metadata);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  }, [params]);
 
   return (
-    <div className={styles.container}>
-      <div className={styles.title}>
-        Your Rewards
-      </div>
-      <div className={styles.content}>
-        <p>
-          You have <b>{tokenMetadata?.totalSupply}</b> Gold Gems
-        </p>
-        <button onClick={() => {
-          // Stake
-        }}>
-          Stake
-        </button>
-        {tokenMetadata && <ThirdwebNftMedia metadata={tokenMetadata} height={"48"} />}
-      </div>
+    <div className="container">
+      <h1>Rewards</h1>
+      {nftMetadata ? (
+        // Render the NFT using the ThirdwebNftMedia component
+        <ThirdwebNftMedia metadata={nftMetadata} />
+      ) : (
+        <p>Loading...</p>
+      )}
     </div>
   );
 };
-
-export default Rewards;
