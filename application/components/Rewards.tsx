@@ -37,4 +37,4 @@ const Rewards = () => {
   );
 };
 
-export default withRouter(Rewards);
+export default Rewards;
