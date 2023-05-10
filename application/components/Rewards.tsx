@@ -12,6 +12,7 @@ const Rewards = () => {
   const { connection } = useWeb3();
   const [tokenMetadata, setTokenMetadata] = useState();
 
+const useHandleClick = () => {
   const handleClick = () => {
     // Get the token metadata
     const { id } = useRouter().query;
@@ -22,6 +23,9 @@ const Rewards = () => {
       setTokenMetadata(response.json());
     });
   };
+
+  return handleClick;
+};
 
   return (
     <div className={styles.container}>
