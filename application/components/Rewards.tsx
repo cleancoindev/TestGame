@@ -2,13 +2,18 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import ThirdwebNftMedia from "@thirdweb/nft-media";
 
+const useRouterParams = () => {
+  const router = useRouter();
+  const { publicKey, id } = router.query;
+  return { publicKey, id };
+};
+
 const Rewards = () => {
-  const { publicKey } = useRouter();
+  const { publicKey, id } = useRouterParams();
   const [tokenMetadata, setTokenMetadata] = useState();
 
   useEffect(() => {
     // Get the token metadata
-    const { id } = useRouter().query;
     connection.request({
       method: "get",
       path: `/metadata/${id}`,
