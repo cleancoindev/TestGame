@@ -52,6 +52,8 @@ export default function Rewards({ miningContract, tokenContract }: Props) {
           height={"48"}
         />
       )}
+      </div>
+      <div>
       <p className={styles.noGapBottom}>
         Balance: <b>{currentBalance?.displayValue}</b>
       </p>
