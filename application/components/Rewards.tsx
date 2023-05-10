@@ -27,6 +27,8 @@ const Rewards = () => {
   const { connection } = useWeb3();
   const [tokenMetadata, setTokenMetadata] = useState();
 
+  const handleClick = useHandleClick();
+
   return (
     <div className={styles.container}>
       <div className={styles.title}>
