@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import ThirdwebNftMedia from "@thirdweb/nft-media";
+import ThirdwebNftMedia, { ThirdwebNftMediaProps } from "@thirdweb/nft-media";
+
 
 const useRouterParams = () => {
   const router = useRouter();
